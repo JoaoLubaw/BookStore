@@ -3,6 +3,7 @@
 *.pyo
 __pycache__/
 *.sqlite3
+db.sqlite3
 
 # Arquivos de ambiente virtual
 venv/
@@ -20,6 +21,7 @@ env/
 # Arquivos específicos do sistema operacional
 .DS_Store
 Thumbs.db
+
 
 # Arquivos gerados durante a execução do projeto
 /media/
