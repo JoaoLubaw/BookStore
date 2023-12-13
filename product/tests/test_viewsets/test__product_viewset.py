@@ -19,9 +19,12 @@ class TestProductViewSet(APITestCase):
         self.user = UserFactory()
         self.token = Token.objects.create(user=self.user)
 
+        category = CategoryFactory()
+
         self.product = ProductFactory(
             title='pro controller',
             price=200.00,
+            category=category.title
         )
 
         self.client.force_login(user=self.user)
@@ -45,7 +48,7 @@ class TestProductViewSet(APITestCase):
         data = json.dumps({
             'title': 'notebook',
             'price': 800.00,
-            'category': [{'id': category.id}]
+            'category': [category.id for category in [category]]
         })
 
         response = self.client.post(
