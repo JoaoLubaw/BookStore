@@ -19,12 +19,14 @@ class OrderFactory(factory.django.DjangoModelFactory):
 
     @factory.post_generation
     def product(self, create, extracted, **kwargs):
-        if not create:
+        if not create or not extracted:
             return
 
-        if extracted:
+        if isinstance(extracted, list):
             for product in extracted:
                 self.product.add(product)
 
+
     class Meta:
         model = Order
+        abstract = False
