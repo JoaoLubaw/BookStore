@@ -25,8 +25,6 @@ SECRET_KEY = os.environ.setdefault("SECRET_KEY", "django-insecure-o)8jin1w1h$h)h
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
-
 
 # Application definition
 
@@ -47,6 +45,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
+    "whitenoise.middleware.WhiteNoiseMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
@@ -78,6 +77,7 @@ TEMPLATES = [
 WSGI_APPLICATION = "bookstore.wsgi.application"
 
 STATIC_ROOT = BASE_DIR / 'staticfiles'
+STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
 
 # Database
@@ -150,4 +150,4 @@ INTERNAL_IPS = [
     '127.0.0.1',
 ]
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'project-ebookstore-api-e41e0a5e44ac.herokuapp.com']
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'ebac-bookstore--api-4d09f969c978.herokuapp.com']
