@@ -23,7 +23,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.environ.get("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 
 # Application definition
@@ -92,7 +92,7 @@ DATABASES = {
         'USER': os.environ.get('DB_USER', 'DB_USER'),
         'PASSWORD': os.environ.get('DB_PASSWORD', 'DB_PASSWORD'),
         'HOST': os.environ.get('DB_HOST', 'DB_HOST'),
-        'PORT': os.environ.get('DB_PORT', 'DB_PORT'),
+        'PORT': os.environ.get('DB_PORT', 36141),
     }
 }
 
