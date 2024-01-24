@@ -1,36 +1,22 @@
-name: Push Container to Fly.io
+name: Fly Deploy
 
 on:
   push:
     branches:
-      - "main"
+      - main
 
 jobs:
-  fly-deploy:
+  deploy:
+    name: Deploy app
     runs-on: ubuntu-latest
+    concurrency: deploy-group # opcional: garante que apenas uma ação seja executada por vez
     steps:
-      - name: Check if flyctl is installed
-        run: |
-          echo "Checking if flyctl is installed..."
-          if ! command -v flyctl &> /dev/null
-          then
-            echo "flyctl is not installed. Installing..."
-            curl -L https://fly.io/install.sh | sh
-            echo "flyctl installed successfully."
-          else
-            echo "flyctl is already installed."
-          fi
+      - uses: actions/checkout@v3
 
-      - name: Check out repository
-        uses: actions/checkout@v2
-
-      - name: Set environment variables
-        run: |
-          export FLYCTL_CONFIG_FILE=/dev/null
-          export FLY_ENV=remote
-
-      - name: Login to Fly.io
-        run: /home/runner/.fly/bin/flyctl auth login -t "${{ secrets.FLY_API_TOKEN }}"
+      - name: Set up Fly CLI
+        uses: superfly/flyctl-actions/setup-flyctl@master
 
       - name: Deploy to Fly.io
-        run: /home/runner/.fly/bin/flyctl deploy
+        run: flyctl deploy --remote-only
+        env:
+          FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
