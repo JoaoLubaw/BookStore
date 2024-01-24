@@ -25,7 +25,7 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Login to Fly.io
-        run: /home/runner/.fly/bin/flyctl auth login --remote-only -t "${{ secrets.FLY_API_TOKEN }}"
+        run: echo "${{ secrets.FLY_API_TOKEN }}" | /home/runner/.fly/bin/flyctl auth login -t -
 
       - name: Deploy to Fly.io
         run: /home/runner/.fly/bin/flyctl deploy
