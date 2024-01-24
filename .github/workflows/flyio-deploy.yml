@@ -11,11 +11,12 @@ jobs:
     steps:
       - name: Check if flyctl is installed
         run: |
+          echo "Checking if flyctl is installed..."
           if ! command -v flyctl &> /dev/null
           then
               echo "flyctl is not installed. Installing..."
               curl -L https://fly.io/install.sh | sh
-              /home/runner/.fly/bin/flyctl auth login -t "${{ secrets.FLY_API_TOKEN }}"
+              echo "flyctl installed successfully."
           else
               echo "flyctl is already installed."
           fi
@@ -43,4 +44,4 @@ jobs:
           echo "machine api.fly.io login api" > ~/.netrc
           echo "machine git.fly.io login git" >> ~/.netrc
         env:
-          FLY_API_TOKEN:
+          FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
