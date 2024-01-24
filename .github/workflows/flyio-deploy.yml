@@ -3,7 +3,7 @@ name: Push Container to Fly.io
 on:
   push:
     branches:
-      - 'main'
+      - "main"
 
 jobs:
   fly-deploy:
@@ -15,6 +15,8 @@ jobs:
           then
               echo "flyctl is not installed. Installing..."
               curl -L https://fly.io/install.sh | sh
+              export FLYCTL_INSTALL="/home/runner/.fly"
+              export PATH="$FLYCTL_INSTALL/bin:$PATH"            
           else
               echo "flyctl is already installed."
           fi
@@ -40,9 +42,4 @@ jobs:
       - name: Configure Fly.io secrets
         run: |
           echo "machine api.fly.io login api" > ~/.netrc
-          echo "machine git.fly.io login git" >> ~/.netrc
-        env:
-          FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
-
-      - name: Push to Fly.io
-        run: git push fly main:main
+          echo "machine git.fly.io logi
