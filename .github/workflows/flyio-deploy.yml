@@ -24,8 +24,13 @@ jobs:
       - name: Check out repository
         uses: actions/checkout@v2
 
+      - name: Set environment variables
+        run: |
+          export FLYCTL_CONFIG_FILE=/dev/null
+          export FLY_ENV=remote
+
       - name: Login to Fly.io
-        run: echo "${{ secrets.FLY_API_TOKEN }}" | /home/runner/.fly/bin/flyctl auth login -t -
+        run: /home/runner/.fly/bin/flyctl auth login -t "${{ secrets.FLY_API_TOKEN }}"
 
       - name: Deploy to Fly.io
         run: /home/runner/.fly/bin/flyctl deploy
