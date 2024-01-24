@@ -41,4 +41,4 @@ jobs:
           echo "DB_USER=${DB_USER}" >> $GITHUB_ENV
           echo "DB_PASSWORD=${DB_PASSWORD}" >> $GITHUB_ENV
           echo "DB_HOST=${DB_HOST}" >> $GITHUB_ENV
-          echo "DB_PORT=${DB_PORT}
+          echo "DB_PORT=${DB_PORT}" >> $GITHUB_ENV
